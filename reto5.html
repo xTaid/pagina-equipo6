@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto 5 - Equipo 6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Poppins, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 20px;
+            background: #431111;
+            border-radius: 50px;
+            border: 3.3px solid #6b1515;
+            font-weight: 700;
+            color: #FFF;
+            transition: transform .2s ease, color .2s ease, background .2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            border: 3.3px solid #ff112d;
+            border-color: #ff112d;
+            background: #952a2a;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+
+        #ctaPrincipal {
+            background: #431111;
+        }
+
+        #ctaPrincipal:hover {
+            background: #6b1515;
+            border: 3.3px solid #ff112d;
+            color: #FFF;
+            transform: translateY(-1px);
+            text-shadow: rgba(0, 0, 0, 0.3) 0px 3px 2px;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at left, rgba(30, 6, 6, 0.87) 0%, rgba(60, 15, 15, 0.87) 100%), url("https://wallpapers.com/images/high/red-wine-in-vineyard-s3xtcgi5mhyp5hwg.webp");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            padding-top: 80px; /* Space for the header */
+        }
+        
+        /* Main content sections styling */
+        section:not(.hero) {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        section:not(.hero) h2 {
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            min-height: 480px;
+        }
+        .hero-text-col {
+            flex: 1.2;
+            padding: 40px 30px 40px 0;
+            z-index: 2;
+        }
+        .hero-img-col {
+            flex: 1;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            min-width: 230px;
+        }
+        .hero-main-img {
+            width: 300px;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-main-img:hover {
+            transform: scale(1.05);
+        }
+
+        .proveedores img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        @keyframes fadeUp {
+            0% {opacity:0; transform:translateY(22px);}
+            100% {opacity:1; transform:translateY(0);}
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            animation: fadeUp .72s ease forwards;
+        }
+        .reveal:nth-child(1){animation-delay:0s;}
+        .reveal:nth-child(2){animation-delay:.3s;}
+        .reveal:nth-child(3){animation-delay:.55s;}
+        .hero-title{
+            font-size: 2.5rem;
+            line-height: 1.15;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: rgba(0, 0, 0, 0.5) 0px 5px 7px;
+        }
+        .hero-text{
+            font-size: 1.3rem;
+            max-width: 520px;
+            color: #F2F2F2;
+            text-shadow: rgba(0, 0, 0, 0.5) 0px 5px 7px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-flex { flex-direction: column; gap:40px; text-align:center; }
+            .hero-img-col { justify-content: center; margin-top: 32px; }
+            .hero-text-col { padding: 20px 0; }
+            .hero-main-img { width: 200px; height: auto; }
+        }
+
+        header {
+            background: rgba(34, 34, 34, 0);
+        }
+
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .productos_populares, .proveedores, .servicios, .opiniones {
+            text-align: center;
+        }
+
+        .blog-cards, .servicios-list, .galeria {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .blog-card, .servicio, .work-item {
+            background: #ececec;
+            padding: 14px;
+            border-radius: 8px;
+            width: 140px;
+        }
+
+        .restaurantes {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .stats, .blog-cards, .servicios-list, .galeria, .restaurantes {
+                flex-direction: column;
+                align-items: center;
+            }
+            .container { width: 98%; }
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: transparent;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row-reverse;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .scrolled .logo {
+            color: #333;
+            text-shadow: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #c0d8e0;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Populares</a></li>
+                <li><a href="#">Proveedores</a></li>
+                <li><a href="#">Degustaciones</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Opiniones</a></li>
+            </ul>
+        </nav>
+        <div class="logo">
+            <span>Vineristas</span>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container hero-flex">
+        <!-- Columna izquierda-->
+        <div class="hero-text-col">
+            <h1 class="hero-title reveal">Conoce el verdadero sabor</h1>
+            <p class="hero-text reveal">
+                Explora nuestra colección de vinos y servicios que te ofrecemos. ¡Únete a nosotros y descubre los vinos que te encantarán!
+            </p>
+            <a id="ctaPrincipal" class="btn btn-primary reveal" href="#ConocerMas">Conocer más</a>
+        </div>
+        <!-- Columna derecha: PENDIENTE - Buscar imagen de vino png -->
+        <div class="hero-img-col reveal">
+            <!-- imagen de vino png con fondo transparente -->
+            <img src="https://purepng.com/public/uploads/large/purepng.com-wine-bottlebottle-food-wine-object-drink-alcohol-beverage-liquor-941524620069ujd6f.png" alt="Botella de vino" class="hero-main-img">
+        </div>
+    </div>
+</section>
+
+<!-- Pendiente: Mejorar lugar de metricas -->
+<section class="stats">
+    <div class="container">
+        <div class="stat">
+            <h2>20,150</h2>
+            <p>Productos vendidos</p>
+        </div>
+        <div class="stat">
+            <h2>105</h2>
+            <p>Reconocimientos</p>
+        </div>
+        <div class="stat">
+            <h2>540</h2>
+            <p>Restaurantes</p>
+        </div>
+    </div>
+</section>
+
+<section class="productos_populares">
+    <div class="container">
+        <h2>Productos populares</h2>
+        <div class="blog-cards">
+            <article class="blog-card">
+                <img src="#" alt="Producto 1">
+                <h3>Producto 1</h3>
+                <p>Descripcion</p>
+            </article>
+            <article class="blog-card">
+                <img src="#" alt="Producto 2">
+                <h3>Producto 2</h3>
+                <p>Descripcion</p>
+            </article>
+            <article class="blog-card">
+                <img src="#" alt="Producto 3">
+                <h3>Producto 3</h3>
+                <p>Descripcion</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="proveedores container py-5 text-center">
+    <div class="container">
+        <h2>Proveedores</h2>
+        <div class="row g-3">
+            <div class="work-item"><img src="https://tiendagobar.com/cdn/shop/articles/grapes-553462_1280.jpg?v=1735956173&width=480" alt="Proveedor 1"></div>
+            <div class="work-item"><img src="https://tiendagobar.com/cdn/shop/articles/grapes-553462_1280.jpg?v=1735956173&width=480" alt="Proveedor 2"></div>
+            <div class="work-item"><img src="https://tiendagobar.com/cdn/shop/articles/grapes-553462_1280.jpg?v=1735956173&width=480" alt="Proveedor 3"></div>
+            <div class="work-item"><img src="https://tiendagobar.com/cdn/shop/articles/grapes-553462_1280.jpg?v=1735956173&width=480" alt="Proveedor 4"></div>
+            <div class="work-item"><img src="https://tiendagobar.com/cdn/shop/articles/grapes-553462_1280.jpg?v=1735956173&width=480" alt="Proveedor 5"></div>
+            <div class="work-item"><img src="https://tiendagobar.com/cdn/shop/articles/grapes-553462_1280.jpg?v=1735956173&width=480" alt="Proveedor 6"></div>
+        </div>
+    </div>
+</section>
+
+
+<section class="restaurantes">
+    <div class="container">
+        <div class="restaurante-foto">
+            <!-- Pendiente añadir imagen de restaurante -->
+        </div>
+        <div class="restaurante-info">
+            <h2>Nombre restaurante</h2>
+            <p>Pendiente descripcion de restaurante</p>
+            <div class="restaurante-social">
+                <!-- Pendiente: redes sociales -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="servicios">
+    <div class="container">
+        <h2>Servicios</h2>
+        <div class="servicios-list">
+            <div class="servicio">
+                <h3>Elaboración</h3>
+                <p>Elaboracion de productos</p>
+            </div>
+            <div class="servicio">
+                <h3>Distribuición</h3>
+                <p>Distribuición de los servicios</p>
+            </div>
+            <div class="servicio">
+                <h3>Degustación</h3>
+                <p>Lugares para degustar los productos</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="opiniones">
+    <div class="container">
+        <h2>Opiniones</h2>
+        <blockquote>
+            "Aquí va una opinion xd"
+            <footer>Atte: Persona</footer>
+        </blockquote>
+    </div>
+</section>
+
+
+<footer>
+    <div class="container">
+        <p>Vineria. Todos los derechos reservados.</p>
+        <div class="footer-social">
+            <!-- Pendiente mejorar el footer xd -->
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
